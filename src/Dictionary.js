@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import Definition from "./Definition";
 
 export default function Dictionary() {
   let [keyword, setKeyword] = useState("");
@@ -44,7 +45,11 @@ export default function Dictionary() {
           </form>
         </div>
       </div>
-      <div className="row"></div>
+      {definition && (
+        <div className="row">
+          <Definition definition={definition} />
+        </div>
+      )}
     </div>
   );
 }

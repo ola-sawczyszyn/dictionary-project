@@ -1,0 +1,13 @@
+.meaning {
+}
+
+.meaning .meaning__part-of-speach {
+}
+
+.meaning .meaning__definition {
+  margin-top: 8px;
+}
+
+.meaning .meaning__example {
+  font-style: italic;
+}
