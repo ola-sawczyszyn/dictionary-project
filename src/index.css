@@ -16,9 +16,6 @@ body {
   box-sizing: border-box;
 }
 
-#root {
-}
-
 .app {
   padding: 16px;
   display: flex;
