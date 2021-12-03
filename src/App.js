@@ -1,13 +1,8 @@
-import "./App.css";
 import Dictionary from "./components/Dictionary";
 function App() {
   return (
-    <div className="container app">
-      <header>
-        <h1> Dictionary </h1>
-      </header>
-      <Dictionary />
-
+    <div className="app">
+      <Dictionary defaultKeyword="pug" />
       <footer className="text-center">Created by Aleksandra Sawczyszyn</footer>
     </div>
   );

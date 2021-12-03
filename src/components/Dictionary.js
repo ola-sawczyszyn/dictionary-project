@@ -1,14 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import "./Dictionary.css";
 import Result from "./Result";
 
-export default function Dictionary() {
-  let [keyword, setKeyword] = useState("");
+export default function Dictionary(props) {
+  let [query, setQuery] = useState(props.defaultKeyword || "");
+  let [keyword, setKeyword] = useState(props.defaultKeyword || "");
   let [result, setResult] = useState(null);
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  useEffect(() => {
     if (!keyword) {
+      setResult(null);
       return;
     }
     axios
@@ -16,40 +18,28 @@ export default function Dictionary() {
       .then((response) => response.data)
       .then((results) => setResult(results[0]))
       .catch((error) => console.error(error));
-  }
+  }, [keyword]);
 
-  function handleChange(event) {
-    setKeyword(event.target.value);
+  function handleSubmit(event) {
+    event.preventDefault();
+    setKeyword(query);
   }
 
   return (
     <div className="dictionary">
-      <div className="row">
-        <div className="col">
-          <form onSubmit={handleSubmit}>
-            <div className="row">
-              <div className="col form-group">
-                <input
-                  className="form-control"
-                  type="search"
-                  value={keyword}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="col">
-                <button className="btn btn-primary" type="submit">
-                  SEARCH
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      {result && (
-        <div className="row">
-          <Result result={result} />
-        </div>
-      )}
+      <section>
+        <h1> What are you looking for? </h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="form-control"
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+          <div className="hint">For example: Sunset, Yoga, Dog</div>
+        </form>
+      </section>
+      {result && <Result result={result} />}
     </div>
   );
 }

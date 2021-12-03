@@ -6,10 +6,14 @@ export default function Result(props) {
   let { result } = props;
   return (
     <div className="result">
-      <h2>{result.word}</h2>
-      <Phonetics phonetics={result.phonetics} />
+      <section>
+        <h2>{result.word}</h2>
+        <Phonetics phonetics={result.phonetics} />
+      </section>
       {result.meanings.map((meaning, index) => (
-        <Meaning key={index} meaning={meaning} />
+        <section key={index}>
+          <Meaning meaning={meaning} />
+        </section>
       ))}
     </div>
   );
