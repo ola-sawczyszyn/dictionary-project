@@ -1,0 +1,11 @@
+.synonyms {
+  padding-left: 0;
+  color: gray;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.synonyms > * {
+  margin-right: 8px;
+}

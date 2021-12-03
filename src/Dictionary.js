@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
-import Definition from "./Definition";
+import Result from "./Result";
 
 export default function Dictionary() {
   let [keyword, setKeyword] = useState("");
-  let [definition, setDefinition] = useState(null);
+  let [result, setResult] = useState(null);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,7 +14,7 @@ export default function Dictionary() {
     axios
       .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`)
       .then((response) => response.data)
-      .then((definitions) => setDefinition(definitions[0]))
+      .then((results) => setResult(results[0]))
       .catch((error) => console.error(error));
   }
 
@@ -45,9 +45,9 @@ export default function Dictionary() {
           </form>
         </div>
       </div>
-      {definition && (
+      {result && (
         <div className="row">
-          <Definition definition={definition} />
+          <Result result={result} />
         </div>
       )}
     </div>
