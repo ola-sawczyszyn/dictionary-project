@@ -1,13 +1,15 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./Dictionary.css";
 import Photos from "./Photos";
 import Result from "./Result";
 
-let apiKey = "563492ad6f9170000100000187af803c0963476d8745cf592833ee00";
-let pexelHeaders = {
-  Authentication: apiKey,
+let pexelAxiosConfig = {
+  headers: {
+    Authorization: "563492ad6f9170000100000187af803c0963476d8745cf592833ee00",
+  },
 };
+
 export default function Dictionary(props) {
   let [query, setQuery] = useState(props.defaultKeyword || "");
   let [keyword, setKeyword] = useState(props.defaultKeyword || "");
@@ -23,22 +25,20 @@ export default function Dictionary(props) {
       .get(`https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`)
       .then((response) => response.data)
       .then((results) => setResult(results[0]))
+
       .catch((error) => console.error(error));
   }, [keyword]);
 
   useEffect(() => {
+    setPhotos(null);
     if (!result) {
-      setPhotos(null);
       return;
     }
-
+    let url = `https://api.pexels.com/v1/search?query=${result.word}&per_page=9`;
     axios
-      .get(`https://api.pexels.com/v1/search?query=${result.word}&per_page=9`, {
-        headers: pexelHeaders,
-      })
+      .get(url, pexelAxiosConfig)
       .then((response) => response.data)
-      .then((data) => setPhotos(data.photos))
-      .catch((error) => console.error(error));
+      .then((data) => setPhotos(data.photos));
   }, [result]);
 
   function handleSubmit(event) {

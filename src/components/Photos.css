@@ -7,11 +7,10 @@
 
 .photos .photo {
   width: 300px;
-  max-width: 25%;
+  max-width: 33%;
 }
 
-.photos .photo img,
-.photos .photo a {
+.photos .photo img {
   width: 100%;
   border-radius: 4px;
 }
