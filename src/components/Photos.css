@@ -1,0 +1,17 @@
+.photos {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.photos .photo {
+  width: 300px;
+  max-width: 25%;
+}
+
+.photos .photo img,
+.photos .photo a {
+  width: 100%;
+  border-radius: 4px;
+}
